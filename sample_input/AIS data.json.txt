@@ -1,0 +1,72 @@
+{
+  "AIS": {
+    "FinancialYear": "2023-2024",
+    "PAN": "ABCDE1234F",
+    "Name": "Priya Patel",
+    "Address": "12, MG Road, Mumbai, Maharashtra, India",
+    "Contact": {
+      "Mobile": "9876543210",
+      "Email": "priya.patel@example.com"
+    },
+    "IncomeSources": [
+      {
+        "SourceType": "Salary",
+        "Amount": 1600000,
+        "Details": {
+          "EmployerPAN": "XYZPD5678G",
+          "EmployerName": "Tech Solutions Pvt Ltd",
+          "TDS": 180000
+        }
+      },
+      {
+        "SourceType": "Interest from Fixed Deposits",
+        "Amount": 25000,
+        "Details": {
+          "BankPAN": "BANKP9876H",
+          "BankName": "State Bank of India",
+          "TDS": 2500
+        }
+      },
+      {
+        "SourceType": "PPF Interest",
+        "Amount": 10000,
+        "Details": {
+          "BankPAN": "BANKP9876H",
+          "BankName": "State Bank of India"
+        }
+      },
+      {
+        "SourceType": "Mutual Fund Redemption",
+        "Amount": 0,
+        "Details": {
+          "MutualFundPAN": "MUTUAL12345",
+          "MutualFundName": "Axis Mutual Fund"
+        }
+      }
+    ],
+    "TaxPayments": [
+      {
+        "PaymentType": "TDS on Salary",
+        "Amount": 180000,
+        "Details": {
+          "TAN": "XYZP12345A"
+        }
+      },
+      {
+        "PaymentType": "TDS on FD Interest",
+        "Amount": 2500,
+        "Details":{
+          "BankPAN": "BANKP9876H"
+        }
+      }
+    ],
+    "OtherInformation": [
+      {
+        "InfoType": "High Value Transactions",
+        "Details": "NIL"
+      }
+    ],
+    "DateOfGeneration": "2024-05-30"
+  }
+}
+

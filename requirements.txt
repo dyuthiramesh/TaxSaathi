@@ -1,0 +1,10 @@
+chromadb==0.4.8
+google-generativeai==0.4.1
+opencv-python==4.8.0.76
+pandas==1.5.3
+pillow==10.0.0
+pypdf==3.15.2
+pytesseract==0.3.10
+python-magic==0.4.27
+streamlit==1.25.0
+tesseract==5.3.1
