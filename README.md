@@ -12,7 +12,6 @@
 - ⚖️ **Tax Regime Comparison:** Computes tax liabilities under both old and new regimes and recommends the optimal choice.
 - 💬 **AI-Driven Query Handling:** Answers tax-related queries using a Retrieval-Augmented Generation (RAG) approach.
 - 📥 **ITR-2 Form Generation:** Creates ready-to-file ITR-2 forms with a focus on compliance with Indian tax regulations.
-- 📊 **Tax Summary & Insights:** Presents tax data through intuitive visualizations.
 
 ---
 
@@ -57,12 +56,15 @@
 ```plaintext
 TaxSaathi/
 ├── assets/                     # Images and logos
+├── chroma_db                   # ChromaDB vector store for RAG pipeline
 ├── modules/                    # Core application modules
 │   ├── document_processing.py  # Handles PDF data extraction
 │   ├── tax_calculation.py      # Computes tax liabilities and generates ITR-2
 │   ├── rag_pipeline.py         # RAG model for AI query handling
 │   └── utils.py                # Helper functions and data loading
 ├── app.py                      # Streamlit app entry point
+├── sample_input/               # Sample input files for testing
+├── sample_output/              # Sample output files for reference
 ├── requirements.txt            # Python dependencies
 ├── README.md                   # Project documentation
 └── LICENSE                     # License information
@@ -75,7 +77,7 @@ TaxSaathi/
 ### 1. **Clone the Repository:**
 
 ```bash
-git clone https://github.com/your-username/TaxSaathi.git
+git clone https://github.com/dyuthiramesh/TaxSaathi.git
 cd TaxSaathi
 ```
 
@@ -115,27 +117,45 @@ streamlit run app.py
 
 - Upload Form 16 (required) and optional investment proofs and bank statements.
 
-### ⚖️ **Tax Regime Selection:**
+### ⚖️ **Tax Regime Calculation:**
 
-- Choose between **Old Regime**, **New Regime**, or **AI Recommendation**.
-
-### 💬 **Ask Tax Queries:**
-
-- Type in your tax-related questions and get AI-driven responses.
+- Calculates the tax under both old and new regimes and gets the recommended choice.
 
 ### 📥 **Download ITR Forms:**
 
 - Generate and download **ITR-2** forms for both tax regimes.
 
+### 💬 **Ask Tax Queries:**
+
+- Type in your tax-related questions and get AI-driven responses.
+
 ---
 
-## 📊 **User InterfaceScreenshots**
+## 📊 **User Interface and Output Screenshots**
 
-![UI Screenshot 1](assets/ui_1.png)
+### **Landing page UI**
 
-![UI Screenshot 2](assets/ui_2.png)
+![UI Screenshot 1](assets/landing_page_ui.png)
 
-![UI Screenshot 3](assets/ui_3.png)
+### **Document Upload Interface**
+
+![UI Screenshot 2](assets/document_upload_interface.png)
+
+### **Tax Summary & Regime Comparison**
+
+![UI Screenshot 3](assets/recommended_regime_download.png)
+
+### **AI Query Assistant**
+
+![UI Screenshot 4](assets/ai_query_assistant_1.png)
+
+![UI Screenshot 5](assets/ai_query_assistant_2.png)
+
+### **Generated ITR-2 Form Preview**
+
+![Output 1](assets/generated_pdfs_1.png)
+
+![Output 2](assets/generated_pdfs_2.png)
 
 ---
 

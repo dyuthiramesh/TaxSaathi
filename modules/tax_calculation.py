@@ -1,39 +1,55 @@
-import os
-from modules.utils import generate_gemini_prompt, call_gemini_api
+from modules.utils import get_gemini_model
 
-GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+def format_pages_as_text(pages):
+    """
+    Extracts and formats text from document pages.
 
-def calculate_tax(document_data):
+    Args:
+        pages (list): A list of document pages containing 'page_content'.
+
+    Returns:
+        str: Formatted text combining all pages.
     """
-    Calculate tax liabilities using the Gemini API and suggest the best regime.
-    
-    :param document_data: Financial data extracted from documents
-    :return: Tax details and recommended regime as a dictionary
+    return "\n\n".join(p['page_content'] for p in pages)  # Extract page content correctly
+
+def calculate_tax(pages):
     """
-    prompt = generate_gemini_prompt(document_data)
-    tax_details = call_gemini_api(prompt)
-    
-    if not tax_details:
-        return {'error': 'Failed to fetch tax details from Gemini API.'}
+    Computes tax details for both the Old and New tax regimes using AI.
+
+    Args:
+        pages (list): A list of document pages with financial details.
+
+    Returns:
+        dict: Contains tax details for both regimes and the recommended option.
+    """
+    model = get_gemini_model()
+    context_text = format_pages_as_text(pages)  # Convert document pages into plain text
+
+    # AI prompts for tax computation
+    old_regime_prompt = (
+        f"Based on the following financial details (all amounts in INR), generate an ITR-2 form under the Indian old tax regime:\n\n{context_text}"
+    )
+    new_regime_prompt = (
+        f"Based on the following financial details (all amounts in INR), generate an ITR-2 form under the Indian new tax regime:\n\n{context_text}"
+    )
+    recommendation_prompt = (
+        f"Based on the following financial details, provide a short conclusion on which tax regime is more beneficial.\n"
+        f"Only output in the following format:\n\n"
+        f"**Comparison:**\n"
+        f"* **Old Regime Tax:** INR X\n"
+        f"* **New Regime Tax:** INR Y\n\n"
+        f"**Conclusion:**\n"
+        f"The **[better regime]** is more beneficial for you, resulting in a tax saving of INR Z.\n\n"
+        f"{context_text}"
+    )
+
+    # Generate AI responses for both regimes and recommendation
+    old_regime_response = model.invoke([{"role": "user", "content": old_regime_prompt}])
+    new_regime_response = model.invoke([{"role": "user", "content": new_regime_prompt}])
+    recommendation_response = model.invoke([{"role": "user", "content": recommendation_prompt}])
 
     return {
-        'old_regime': tax_details.get('old_regime_tax', 0),
-        'new_regime': tax_details.get('new_regime_tax', 0),
-        'recommended_regime': (
-            'Old Regime' if tax_details.get('old_regime_tax', float('inf')) < tax_details.get('new_regime_tax', float('inf'))
-            else 'New Regime'
-        )
+        "old_regime": old_regime_response.content,
+        "new_regime": new_regime_response.content,
+        "recommended_regime": recommendation_response.content,
     }
-
-def generate_itr_files(document_data):
-    """
-    Generates ITR-2 forms for both tax regimes.
-    
-    :param document_data: Financial data extracted from documents
-    :return: Byte data for old and new regime ITR forms
-    """
-    # Placeholder: Implement actual ITR generation logic
-    old_itr = b"Old Regime ITR PDF content"
-    new_itr = b"New Regime ITR PDF content"
-    
-    return old_itr, new_itr
