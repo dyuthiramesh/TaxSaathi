@@ -2,6 +2,9 @@ chromadb
 dotenv
 langchain
 google-generativeai
+langchain
+langchain-google-genai
+langchain_community
 pypdf2
 python-dotenv
 reportlab
